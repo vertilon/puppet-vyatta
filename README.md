@@ -19,13 +19,13 @@ Clone this repo to your Puppet modules directory
 
 	1) Update all packages in system:
 	```
-	sudo apt-get update && sudo apt-get upgrade
+		sudo apt-get update && sudo apt-get upgrade
 	```
 	Reboot if needed.
 	
 	2) If version of the VyOS less than 1.0.4(you can check this with ```show version```) upgrade it:
 	```
-	add system image <url-to-the-vyos-1.0.4> # You can find it on the http://vyos.net
+		add system image <url-to-the-vyos-1.0.4> # You can find it on the http://vyos.net
 	```
 	Reboot to start using vyos 1.0.4 image
 	
