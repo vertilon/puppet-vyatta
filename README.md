@@ -15,18 +15,21 @@ Clone this repo to your Puppet modules directory
 
 * [File concatenation system for Puppet] (https://github.com/puppetlabs/puppetlabs-concat)
 * [Puppet Labs Standard Library module] (https://github.com/puppetlabs/puppetlabs-stdlib)
-* If you are using VyOS and tring to install puppet agent, just follow theese easy steps:
-	1. Update all packages in system:
-		```
-			sudo apt-get update && sudo apt-get upgrade
-		```
-		Reboot if needed
-	2. If version of the VyOS less than 1.0.4(you can check it with ```show version```) upgrade it:
+* If you are using VyOS and trying to install puppet agent, just follow these easy steps:
+
+	1) Update all packages in system:
 	```
-		add system image <url-to-the-vyos-1.0.4> # You can find it on the [VyOS website] (http://vyos.net)
+	sudo apt-get update && sudo apt-get upgrade
 	```
-		Reboot to start using vyos 1.0.4 image
-	3. Add debian squeeze repository to be able to download and install puppet-agent:
+	Reboot if needed.
+	
+	2) If version of the VyOS less than 1.0.4(you can check this with ```show version```) upgrade it:
+	```
+	add system image <url-to-the-vyos-1.0.4> # You can find it on the http://vyos.net
+	```
+	Reboot to start using vyos 1.0.4 image
+	
+	3) Add debian squeeze repository to be able to download and install puppet-agent:
 	```
 		configure
 		set system package repository squeeze components 'main contrib non-free'
@@ -38,24 +41,27 @@ Clone this repo to your Puppet modules directory
 		commit	
 		sudo apt-get update
 	```
-	4. Install puppet-agent
+	
+	4) Install puppet-agent
 	```
 		sudo apt-get install puppet
 	```
-	5. Edit /etc/default/pupet and replace string START=no with START=yes, to autostart puppet every reboot:
+	
+	5) Edit /etc/default/pupet and replace string START=no with START=yes, to autostart puppet every reboot:
 	```
 		sed 's/START=no/START=yes/' /etc/default/puppet > puppet && sudo mv puppet /etc/default/
 	```
-	6. Reboot to run puppet and check if puppet runs every reboot:
+	
+	6) Reboot to run puppet and check if puppet runs every reboot:
 	```
 		pgrep puppet
 	```
-		If you see some numbers then all is good, you've installed puppet agent correctly
+	If you see some numbers then all is good, you've installed puppet agent correctly
 
-	7. Before start using puppet you need to configure puppet agent(for example: where is the server? etc.), you can easily do this according to this [manual]  (https://docs.puppetlabs.com/puppet/latest/reference/config_important_settings.html#settings-for-agents-all-nodes).
+	7) Before start using puppet you need to configure puppet agent(for example: where is the server? etc.), you can easily do this according to this [manual]  (https://docs.puppetlabs.com/puppet/latest/reference/config_important_settings.html#settings-for-agents-all-nodes).
 	Just edit /etc/puppet/puppet.conf
 
-	8. After that, if you enter correct settings, you can test if puppet agent communicate with server just run:
+	8) After that, if you enter correct settings, you can test if puppet agent communicate with server just run:
 	```
 		puppet agent -t
 	```
@@ -64,7 +70,7 @@ Clone this repo to your Puppet modules directory
 	```
 		notice: Finished catalog run in 0.03 seconds
 	```
-	this means puppet agent works and you could easily start writing your manifests or whatever it could be on your puppet server
+	Congrats, you've do it right!
 
 ## Usage
 
