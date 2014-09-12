@@ -38,7 +38,15 @@ Clone this repo to your Puppet modules directory
 		set system package repository squeeze-backports components main
 		set system package repository squeeze-backports distribution squeeze-backports
 		set system package repository squeeze-backports url 'http://backports.debian.org/debian-backports'
-		commit	
+		set system package repository puppetlabs components main
+		set system package repository puppetlabs distribution squeeze
+		set system package repository puppetlabs url 'http://apt.puppetlabs.com'
+		set system package repository puppetlabs-dependencies components dependencies
+		set system package repository puppetlabs-dependencies distribution squeeze
+		set system package repository puppetlabs-dependencies url http://apt.puppetlabs.com
+		commit
+		save
+		exit
 		sudo apt-get update
 	```
 	
