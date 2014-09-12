@@ -58,7 +58,7 @@ Clone this repo to your Puppet modules directory
 	```
 	If you see some numbers then all is good, you've installed puppet agent correctly
 
-	7) Before start using puppet you need to configure puppet agent(for example: where is the server? etc.), you can easily do this according to this [manual]  (https://docs.puppetlabs.com/puppet/latest/reference/config_important_settings.html#settings-for-agents-all-nodes).
+	7) Before start using puppet you need to configure puppet agent(for example: where is the server?, enable pluginsync?(!we need it), etc.), you can easily do this according to this [manual]  (https://docs.puppetlabs.com/puppet/latest/reference/config_important_settings.html#settings-for-agents-all-nodes).
 	Just edit /etc/puppet/puppet.conf
 
 	8) After that, if you enter correct settings, you can test if puppet agent communicate with server just run:
