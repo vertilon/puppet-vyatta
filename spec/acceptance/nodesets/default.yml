@@ -1,0 +1,9 @@
+HOSTS:
+  vyos:
+    roles:
+      - agent
+    platform: ubuntu-6-amd64
+    box: higebu/vyos-1.0.4-amd64
+    box_url: https://vagrantcloud.com/higebu/boxes/vyos-1.0.4-amd64
+    hypervisor: vagrant
+    ip: 192.168.21.21
