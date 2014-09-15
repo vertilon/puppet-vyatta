@@ -384,6 +384,44 @@ Define the protocols.
         }
       }
     }
+## Testing
+
+### Prerequsites
+You need a couple of things installed like ruby, bundler and vagrant.
+How to install and configure all of this for Ubuntu 14.04:
+
+1) Install rvm for easy managing gems different projects and vesrions of ruby:
+```	
+	\curl -sSL https://get.rvm.io | bash
+	source ~/.rvm/scripts/rvm
+```
+2) Install ruby 2.1.2:
+```
+	rvm install 2.1.2
+```
+3) Clone this repo or just cd to it:
+```
+	git clone https://github.com/vertilon/puppet-vyatta/
+```
+If rvm asks you for trusting to .rvmrc trust it.
+RVM creates a gemset for you and you'll install all gems to your gemset. You can read about this [here] (https://rvm.io)
+To be sure that you are using right gemset just type ```rvm info``` and check if last string looks like this ```gemset: "puppet-vyatta"```
+4) Install needed libs for gems:
+```
+	sudo apt-get install libxml2-dev libxslt1-dev
+```
+5) Install virtualbox and vagrant, check for the latest on https://www.vagrantup.com/downloads.html:
+```
+	sudo add-apt-repository multiverse
+	sudo apt-get update
+	sudo apt-get install virtualbox
+	wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.5_x86_64.deb
+	sudo dpkg -i vagrant_1.6.5_x86_64.deb
+```
+6) Run dummy-test to be sure that all works:
+```
+	rspec spec/acceptance/dummy_test.rb
+```
 
 ## Contributing
 
