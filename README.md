@@ -1,9 +1,9 @@
 puppet-vyatta
 =============
 
-Generates and installs Vyatta configuration.
+Generates and installs Vyatta/VyOS configuration.
 
-Tested on Vyatta Core 6.6 R1, patches are welcome.
+Tested on Vyatta Core 6.6 R1, limited testing on VyOS 1.0.4, patches are welcome.
 
 ## Installation
 
@@ -394,6 +394,7 @@ You'll need a couple of things installed like ruby, bundler and vagrant. To inst
 If rvm asks about trusting .rvmrc, you should say yes.
 RVM creates a gemset for you in your home directory, and you'll install all gems to your gemset. You can read about this [here] (https://rvm.io)
 To be sure that you are using right gemset just type ```rvm info``` and check if last string looks like this ```gemset: "puppet-vyatta"```
+
 4) Install needed libs for gems:
 ```
 	sudo apt-get install libxml2-dev libxslt1-dev
