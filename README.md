@@ -1,9 +1,9 @@
 puppet-vyatta
 =============
 
-Generates and installs Vyatta configuration.
+Generates and installs Vyatta/VyOS configuration.
 
-Tested on Vyatta Core 6.6 R1, patches are welcome.
+Tested on Vyatta Core 6.6 R1, limited testing on VyOS 1.0.4, patches are welcome.
 
 ## Installation
 
@@ -15,7 +15,7 @@ Clone this repo to your Puppet modules directory
 
 * [File concatenation system for Puppet] (https://github.com/puppetlabs/puppetlabs-concat)
 * [Puppet Labs Standard Library module] (https://github.com/puppetlabs/puppetlabs-stdlib)
-* If you are using VyOS and trying to install puppet agent, just follow these easy steps:
+* If you are using VyOS and trying to install puppet agent, these instructions will help you:
 
 	1) Update all packages in system:
 	```
@@ -23,13 +23,13 @@ Clone this repo to your Puppet modules directory
 	```
 	Reboot if needed.
 	
-	2) If version of the VyOS less than 1.0.4(you can check this with ```show version```) upgrade it:
+	2) If version of the VyOS less than 1.0.4 (you can check this with ```show version```) upgrade it:
 	```
-		add system image <url-to-the-vyos-1.0.4> # You can find it on the http://vyos.net
+		add system image <url-to-the-vyos-1.0.4> # Get the URL from http://vyos.net
 	```
 	Reboot to start using vyos 1.0.4 image
 	
-	3) Add debian squeeze repository to be able to download and install puppet-agent:
+	3) Add debian squeeze repository to download and install puppet-agent:
 	```
 		configure
 		set system package repository squeeze components 'main contrib non-free'
@@ -55,30 +55,18 @@ Clone this repo to your Puppet modules directory
 		sudo apt-get install puppet
 	```
 	
-	5) Edit /etc/default/pupet and replace string START=no with START=yes, to autostart puppet every reboot:
+	5) Edit /etc/default/puppet and replace "START=no" with "START=yes" to ensure puppet starts at boot:
 	```
-		sed 's/START=no/START=yes/' /etc/default/puppet > puppet && sudo mv puppet /etc/default/
+		sed -i 's/^START=no/START=yes/g' /etc/default/puppet
 	```
 	
-	6) Reboot to run puppet and check if puppet runs every reboot:
+	6) Reboot. To confirm puppet is running after a reboot, you can run this:
 	```
 		pgrep puppet
 	```
-	If you see some numbers then all is good, you've installed puppet agent correctly
 
-	7) Before start using puppet you need to configure puppet agent(for example: where is the server?, enable pluginsync?(!we need it), etc.), you can easily do this according to this [manual]  (https://docs.puppetlabs.com/puppet/latest/reference/config_important_settings.html#settings-for-agents-all-nodes).
-	Just edit /etc/puppet/puppet.conf
+	7) Depending on your setup (i.e., masterless, puppetmaster, etc), you may need to make changes to your /etc/puppet/puppet.conf. This is left as an exercise for the reader. The [manual]  (https://docs.puppetlabs.com/puppet/latest/reference/config_important_settings.html#settings-for-agents-all-nodes) may help.
 
-	8) After that, if you enter correct settings, you can test if puppet agent communicate with server just run:
-	```
-		puppet agent -t
-	```
-
-	if the last string will be(seconds value could be different on your machine):
-	```
-		notice: Finished catalog run in 0.03 seconds
-	```
-	Congrats, you've do it right!
 
 ## Usage
 
@@ -384,6 +372,45 @@ Define the protocols.
         }
       }
     }
+## Testing
+The testing approach suggested here uses a healthy mix of vagrant, bundler, and a bunch of ruby gems like rake, beaker and rspec-puppet; check out the Gemfile for the list. In the following example, we will be provisioning a VyOS instance via virtualbox running on Ubuntu 14.04.
+
+### Pre-requisites
+You'll need a couple of things installed like ruby, bundler and vagrant. To install and configure all of this on Ubuntu 14.04:
+
+1) Install rvm to manage different gems for different projects and different versions of ruby. Run this as a *non-root* user:
+```	
+	\curl -sSL https://get.rvm.io | bash
+	source ~/.rvm/scripts/rvm
+```
+2) Install the latest ruby (as the same user as in step 1):
+```
+	rvm install ruby
+```
+3) Clone this repo and cd to it (as the same user as in step 1 & 2):
+```
+	git clone https://github.com/vertilon/puppet-vyatta/
+```
+If rvm asks about trusting .rvmrc, you should say yes.
+RVM creates a gemset for you in your home directory, and you'll install all gems to your gemset. You can read about this [here] (https://rvm.io)
+To be sure that you are using right gemset just type ```rvm info``` and check if last string looks like this ```gemset: "puppet-vyatta"```
+
+4) Install needed libs for gems:
+```
+	sudo apt-get install libxml2-dev libxslt1-dev
+```
+5) Install virtualbox and vagrant, check for the latest on https://www.vagrantup.com/downloads.html:
+```
+	sudo add-apt-repository multiverse
+	sudo apt-get update
+	sudo apt-get install virtualbox
+	wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.5_x86_64.deb
+	sudo dpkg -i vagrant_1.6.5_x86_64.deb
+```
+6) To confirm your test environment is up and running, you can run a dummy-test:
+```
+	rspec spec/acceptance/dummy_test.rb
+```
 
 ## Contributing
 
