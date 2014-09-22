@@ -6,4 +6,7 @@ HOSTS:
     box: higebu/vyos-1.0.4-amd64
     box_url: https://vagrantcloud.com/higebu/boxes/vyos-1.0.4-amd64
     hypervisor: vagrant
-    ip: 192.168.21.21
+    ips:
+      - 192.168.21.21
+      - 10.255.21.21
+    distmoduledir: /etc/puppet/modules

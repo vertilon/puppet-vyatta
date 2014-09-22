@@ -6,3 +6,4 @@ gem 'puppet'
 gem 'beaker-rspec'
 gem 'beaker', :git => "https://github.com/vertilon/beaker"
 gem 'pry'
+gem 'json', '1.8.1'

@@ -21,7 +21,10 @@ RSpec.configure do |c|
       on host, "echo \"deb http://apt.puppetlabs.com squeeze dependencies\" >> /etc/apt/sources.list"
       on host, "sudo apt-get -y update"
       on host, "sudo apt-get -y install puppet facter"
+      copy_module_to(host, :source => proj_root, :module_name => 'vyatta')
       on host, puppet('module','install','puppetlabs-stdlib'), { :acceptable_exit_codes => [0,1] }
+      on host, puppet('module','install','puppetlabs-concat'), { :acceptable_exit_codes => [0,1] }
+      on host, puppet('config', 'set', 'pluginsync true --section main')
     end
   end
 end
