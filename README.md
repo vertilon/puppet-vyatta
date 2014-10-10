@@ -3,7 +3,7 @@ puppet-vyatta
 
 Generates and installs Vyatta/VyOS configuration.
 
-Tested on Vyatta Core 6.6 R1, limited testing on VyOS 1.0.4, patches are welcome.
+Tested on Vyatta Core 6.6 R1, limited testing on VyOS 1.1.0, patches are welcome.
 
 ## Installation
 
@@ -23,11 +23,11 @@ Clone this repo to your Puppet modules directory
 	```
 	Reboot if needed.
 	
-	2) If version of the VyOS less than 1.0.5 (you can check this with ```show version```) upgrade it:
+	2) If version of the VyOS less than 1.1.0 (you can check this with ```show version```) upgrade it:
 	```
-		add system image <url-to-the-vyos-1.0.5> # Get the URL from http://vyos.net
+		add system image <url-to-the-vyos-1.1.0> # Get the URL from http://vyos.net
 	```
-	Reboot to start using vyos 1.0.5 image
+	Reboot to start using vyos 1.1.0 image
 	
 	3) Add debian squeeze repository to download and install puppet-agent:
 	```
