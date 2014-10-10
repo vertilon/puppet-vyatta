@@ -19,6 +19,21 @@ describe 'Run manifest with configuration' do
 				http-redirect => 'enable'
 			}
 		}
+
+		vyatta::service::webproxy{ 'webproxy':
+			configuration => {
+				'listen-address 192.168.21.1' => {
+					disable-transparent => '',
+					port => '2050'
+				},
+				url-filtering => {
+					squidguard => {
+						local-block => 'myspace.com'
+					}
+				}
+
+			}
+		}
 		
 		vyatta::interfaces::ethernet { 'eth0':
 		  configuration => {

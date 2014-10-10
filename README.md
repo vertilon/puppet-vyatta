@@ -23,11 +23,11 @@ Clone this repo to your Puppet modules directory
 	```
 	Reboot if needed.
 	
-	2) If version of the VyOS less than 1.0.4 (you can check this with ```show version```) upgrade it:
+	2) If version of the VyOS less than 1.0.5 (you can check this with ```show version```) upgrade it:
 	```
-		add system image <url-to-the-vyos-1.0.4> # Get the URL from http://vyos.net
+		add system image <url-to-the-vyos-1.0.5> # Get the URL from http://vyos.net
 	```
-	Reboot to start using vyos 1.0.4 image
+	Reboot to start using vyos 1.0.5 image
 	
 	3) Add debian squeeze repository to download and install puppet-agent:
 	```
@@ -217,10 +217,28 @@ Define the system.
 Define the service.
 
     vyatta::service::https { 'https':
+      configuration => {
+        listen-address => '192.168.21.1',
+        http-redirect => 'enable'
+      }
     }
     vyatta::service::ssh { 'ssh':
       configuration => {
         port => 22
+      }
+    }
+    vyatta::service::webproxy{ 'webproxy':
+      configuration => {
+        'listen-address 192.168.21.1' => {
+          disable-transparent => '',
+          port => '2050'
+        },
+        url-filtering => {
+          squidguard => {
+            local-block => 'myspace.com'
+          }
+        }
+
       }
     }
 

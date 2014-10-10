@@ -1,6 +1,7 @@
 HOSTS:
   vyos:
     roles:
+      - vyos
       - agent
     platform: ubuntu-6-amd64
     box: higebu/vyos-1.0.4-amd64
@@ -9,4 +10,16 @@ HOSTS:
     ips:
       - 192.168.21.21
       - 10.255.21.21
+    netmask: 255.255.255.0
     distmoduledir: /etc/puppet/modules
+  openvpnserver:
+    roles:
+      - master
+      - vpnserver
+    platform: ubuntu-6-amd64
+    box: ubuntu-server-12042-x64-vbox4210
+    box_url: http://puppet-vagrant-boxes.puppetlabs.com/ubuntu-server-12042-x64-vbox4210.box
+    hypervisor: vagrant
+    ips:
+      - 192.168.21.20
+    netmask: 255.255.255.0
